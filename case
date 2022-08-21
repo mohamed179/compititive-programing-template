@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+creatorfile=$1
+inputfile=$2
+
+g++ -fdiagnostics-color=always -g $creatorfile -o ${creatorfile%.*}
+
+./${creatorfile%.*} > $inputfile
+
+rm ${creatorfile%.*}
+
+echo "Done creating new test case ($inputfile)!"

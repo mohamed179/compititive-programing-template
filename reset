@@ -1,0 +1,52 @@
+#!/usr/bin/bash
+
+target=$1
+
+if [ $target == "quick" ]; then
+    rm -rf quick
+    mkdir quick
+fi
+if [ $target == "contests" ]; then
+    rm -rf contests
+    mkdir contests
+    mkdir contests/uva
+    mkdir contests/codeforces
+fi
+if [ $target == "problems" ]; then
+    rm -rf problems
+    mkdir problems
+    mkdir problems/uva
+    mkdir problems/codeforces
+fi
+if [ $target == "all" ]; then
+    #quck
+    rm -rf quick
+    mkdir quick
+
+    #contests
+    rm -rf contests
+    mkdir contests
+    mkdir contests/uva
+    mkdir contests/codeforces
+
+    #problems
+    rm -rf problems
+    mkdir problems
+    mkdir problems/uva
+    mkdir problems/codeforces
+fi
+if [ $target == "inputs" ]; then
+    find . -name "input*" -type f -delete
+fi
+if [ $target == "outputs" ]; then
+    find . -name "output*" -type f -delete
+    find . -name "correct_output*" -type f -delete
+fi
+if [ $target == "inout" ]; then
+    #iputs
+    find . -name "input*" -type f -delete
+
+    #outputs
+    find . -name "input*" -type f -delete
+fi
+echo "Done reseting $target!"

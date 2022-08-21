@@ -1,0 +1,56 @@
+#!/usr/bin/bash
+
+if [ -z $1 ]; then
+    echo "Please enter a file to test!"
+    exit 0
+elif [ $1 == "-m" ] && [ -z $2 ]; then
+    echo "Please enter a file to test!"
+    exit 0
+elif [ $1 == "-m" ]; then
+    multiple="Y"
+    file=$2
+elif [ -z $2 ]; then
+    multiple="N"
+    file=$1
+elif [ $2 == "-m" ]; then
+    multiple="Y"
+    file=$1
+else
+    multiple="N"
+    file=$1
+fi
+
+directory="$(dirname "${file}")"
+
+if [ $multiple == "Y" ]; then
+    echo "testing multiple input files on the directory: $directory"
+
+    g++ -fdiagnostics-color=always -g $file -o ${file%.*}
+
+    for inputfile in $directory/input*; do
+        inputfile=${inputfile##*/}
+        outputfile="$directory/output${inputfile:5}"
+        correct_output="$directory/correct_output${inputfile:5}"
+        inputfile="$directory/$inputfile"
+
+        ./${file%.*} < $inputfile > $outputfile
+        
+        cmp --silent $outputfile $correct_output && echo "test result (${inputfile##*/}): SUCCESS" || echo "test result (${inputfile##*/}): FAILED"
+    done
+
+    rm ${file%.*}
+else
+    echo "testing the input file on the directory: $directory..."
+
+    g++ -fdiagnostics-color=always -g $file -o ${file%.*}
+
+    inputfile="$directory/input"
+    outputfile="$directory/output"
+    correct_output="$directory/correct_output"
+
+    ./${file%.*} < $inputfile > $outputfile
+
+    cmp --silent $outputfile $correct_output && echo "test result: SUCCESS" || echo "test result: FAILED"
+
+    rm ${file%.*}
+fi

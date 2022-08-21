@@ -1,0 +1,5 @@
+.vscode/
+.idea/
+input*
+output*
+correct_output*

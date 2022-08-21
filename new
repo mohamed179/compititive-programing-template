@@ -1,0 +1,41 @@
+#!/usr/bin/bash
+
+type=$1
+
+if [ $type == "problems" ]; then
+    template=$2
+    website=$3
+    problem=$4
+    echo "create new problem files in problems/$website/$problem directory"
+    mkdir problems/$website/$problem
+    cp templates/$template problems/$website/$problem/sol.cpp
+    touch problems/$website/$problem/input
+    touch problems/$website/$problem/output
+    touch problems/$website/$problem/correct_output
+fi
+if [ $type == "quick" ]; then
+    template=$2
+    problem=$3
+    echo "create fresh quick files in quick directory";
+    cp templates/$template quick/$problem.cpp
+    find quick -name "input" -type f -delete
+    touch quick/input
+    find quick -name "output" -type f -delete
+    touch quick/output
+    find quick -name "correct_output" -type f -delete
+    touch quick/correct_output
+fi
+if [ $type == "contests" ]; then
+    website=$2
+    contest=$3
+    echo "create new contest files in contests/$website/$contest directory"
+    mkdir contests/$website/$contest
+    problems=("A" "B" "C" "D" "E" "F")
+    for problem in ${problems[@]}; do
+        mkdir contests/$website/$contest/$problem
+        cp templates/default.cpp contests/$website/$contest/$problem/sol.cpp
+        touch contests/$website/$contest/$problem/input
+        touch contests/$website/$contest/$problem/output
+        touch contests/$website/$contest/$problem/correct_output
+    done
+fi
