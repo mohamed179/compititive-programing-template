@@ -42,7 +42,7 @@ if [ $multiple == "Y" ]; then
 else
     echo "testing the input file on the directory: $directory..."
 
-    g++ -fdiagnostics-color=always -g $file -o ${file%.*}
+    g++ -std=c++11 -fdiagnostics-color=always -g $file -o ${file%.*}
 
     inputfile="$directory/input"
     outputfile="$directory/output"
