@@ -25,7 +25,7 @@ directory="$(dirname "${file}")"
 if [ $multiple == "Y" ]; then
     echo "testing multiple input files on the directory: $directory"
 
-    g++ -fdiagnostics-color=always -g $file -o ${file%.*}
+    g++ -std=c++11 -fdiagnostics-color=always -g $file -o ${file%.*}
 
     for inputfile in $directory/input*; do
         inputfile=${inputfile##*/}

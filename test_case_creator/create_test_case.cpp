@@ -6,24 +6,32 @@ void init() {
     srand(time(0));
 }
 
-int random_integer(int lower, int upper)  {
+int random_integer(int lower, int upper) {
+    return (rand() % (upper - lower + 1)) + lower;
+}
+
+long long int random_ll_integer(long long int lower, long long int upper) {
     return (rand() % (upper - lower + 1)) + lower;
 }
 
 int main() {
     init();
-    int c = 1;
-    while(c--) {
-        int n = 10000;
-        printf("%d\n", n);
-        n -= 2;
-        while (n--) {
-            for (int i = 0; i < 4; i++) {
-                printf("%d ", random_integer(100, 499));
+    int t = 1;
+    while(t--) {
+        int n = 100000;
+        while(n--) {
+            switch(random_integer(1, 100) % 27) {
+                case 0:
+                    printf("[");
+                    break;
+                case 1:
+                    printf("]");
+                    break;
+                default:
+                    printf("%c", 'a' + random_integer(0, 25));
             }
-            printf("%d\n", random_integer(100, 499));
         }
+        printf("\n");
     }
-    printf("100 101 102 103 104\n100 101 102 103 104\n0\n");
     return 0;
 }
