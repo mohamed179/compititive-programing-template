@@ -1,5 +1,15 @@
 #!/usr/bin/bash
 
+Black='\033[0;30m'        # Black
+Red='\033[0;31m'          # Red
+Green='\033[0;32m'        # Green
+Yellow='\033[0;33m'       # Yellow
+Blue='\033[0;34m'         # Blue
+Purple='\033[0;35m'       # Purple
+Cyan='\033[0;36m'         # Cyan
+White='\033[0;37m'        # White
+NC='\033[0m'              # No Color
+
 if [ -z $1 ]; then
     echo "Please enter a file to test!"
     exit 0
@@ -35,7 +45,7 @@ if [ $multiple == "Y" ]; then
 
         ./${file%.*} < $inputfile > $outputfile
         
-        cmp --silent $outputfile $correct_output && echo "test result (${inputfile##*/}): SUCCESS" || echo "test result (${inputfile##*/}): FAILED"
+        cmp --silent $outputfile $correct_output && echo -e "test result (${inputfile##*/}): ${Green}SUCCESS${NC}" || echo -e "test result (${inputfile##*/}): ${Red}FAILED${NC}"
     done
 
     rm ${file%.*}
@@ -50,7 +60,7 @@ else
 
     ./${file%.*} < $inputfile > $outputfile
 
-    cmp --silent $outputfile $correct_output && echo "test result: SUCCESS" || echo "test result: FAILED"
+    cmp --silent $outputfile $correct_output && echo -e "test result: ${Green}SUCCESS${NC}" || echo -e "test result: ${Red}FAILED${NC}"
 
     rm ${file%.*}
 fi
