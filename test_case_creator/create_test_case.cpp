@@ -15,19 +15,22 @@ long long int random_ll_integer(long long int lower, long long int upper) {
 
 int main() {
     init();
-    int TC = 10;
+    int TC = 1;
+    printf("%d\n", TC);
     while(TC--) {
-        int P = random_integer(1, 10);
-        int C = 100;
-        printf("%d %d\n", P, C);
-        while(C--) {
-            if (random_integer(1, 100) % 2) {
-                printf("N\n");
-            } else {
-                printf("E %d\n", random_integer(1, P));
-            }
+        printf("\n");
+        int M = 30000;
+        int N = 30000;
+        printf("%d %d\n", M, N);
+        while(M--) {
+            bool pos = random_integer(0, 1);
+            int num = random_integer(0, 2000000000);
+            if (!pos) num = -num;
+            printf("%d ", num);
         }
+        printf("\n");
+        for (int i = 1; i <= N; i++) printf("%d ", i);
+        printf("\n");
     }
-    printf("0 0\n");
     return 0;
 }
